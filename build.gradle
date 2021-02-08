@@ -1,0 +1,99 @@
+plugins {
+  id 'java-library'
+  id 'maven-publish'
+}
+
+group = 'se.solrike'
+version = '0.0.1'
+sourceCompatibility = '11'
+
+java {
+  withSourcesJar()
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  def awsSdkVersion = '1.11.928'
+  api "com.amazonaws:aws-java-sdk-core:$awsSdkVersion"
+  api "com.amazonaws:aws-java-sdk-s3:$awsSdkVersion"
+  api 'org.springframework:spring-context:5.2.8.RELEASE'
+  api 'org.springframework:spring-core:5.2.8.RELEASE'
+  implementation 'org.slf4j:slf4j-api:1.7.30'
+  implementation ('org.springframework.cloud:spring-cloud-aws-context:2.2.1.RELEASE') {
+    exclude group: 'com.amazonaws'
+  }
+  runtimeOnly "com.amazonaws:aws-java-sdk-kms:$awsSdkVersion"
+
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+  testImplementation 'org.mockito:mockito-core:3.7.7'
+  testImplementation 'org.mockito:mockito-junit-jupiter:3.7.7'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.3.RELEASE'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+
+
+// to publish run "./gradlew clean build publish"
+
+publishing {
+  repositories {
+    maven {
+      // change to point to your repo, e.g. http://my.org/repo
+      url = "$buildDir/repo"
+    }
+//    maven {
+//      name = "GitHubPackages"
+//      url = uri("https://maven.pkg.github.com/lucas3oo/spring-aws-extras")
+//      credentials {
+//        username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+//        password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+//      }
+//    }
+
+
+  }
+  publications {
+    gpr(MavenPublication) {
+      artifactId = 'spring-aws-extras'
+      from components.java
+      versionMapping {
+        usage('java-api') {
+          fromResolutionOf('runtimeClasspath')
+        }
+        usage('java-runtime') {
+          fromResolutionResult()
+        }
+      }
+      pom {
+        name = 'spring-aws-extras'
+        description = 'Util classes to glue Spring and AWS together.'
+        url = 'https://github.com/Lucas3oo/spring-aws-extras'
+        licenses {
+          license {
+            name = 'MIT'
+            url = 'https://github.com/Lucas3oo/spring-aws-extras/blob/main/LICENSE'
+          }
+        }
+        developers {
+          developer {
+            id = 'Lucas3oo'
+            name = 'Lucas Persson'
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// to upgrade the metainfo about which gradle version we shall use. Run ./gradlew wrapper after you have updated the version. The commit the new wrapper files except the gradlew.bat
+wrapper {
+  gradleVersion = '6.8.2'
+}
