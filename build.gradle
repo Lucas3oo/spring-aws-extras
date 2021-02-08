@@ -44,18 +44,18 @@ test {
 
 publishing {
   repositories {
-    maven {
-      // change to point to your repo, e.g. http://my.org/repo
-      url = "$buildDir/repo"
-    }
 //    maven {
-//      name = "GitHubPackages"
-//      url = uri("https://maven.pkg.github.com/lucas3oo/spring-aws-extras")
-//      credentials {
-//        username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-//        password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-//      }
+//      // change to point to your repo, e.g. http://my.org/repo
+//      url = "$buildDir/repo"
 //    }
+    maven {
+      name = "GitHubPackages"
+      url = uri("https://maven.pkg.github.com/lucas3oo/spring-aws-extras")
+      credentials {
+        username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+        password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+      }
+    }
 
 
   }
