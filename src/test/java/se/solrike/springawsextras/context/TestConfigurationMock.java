@@ -32,7 +32,7 @@ public class TestConfigurationMock {
     GetObjectRequest getObjectRequestDefault = new GetObjectRequest("BuildComponents", "messages.properties");
     when(amazonS3.getObject(getObjectRequestDefault)).thenReturn(s3ObjectDefault);
 
-    // en doesn't exitst
+    // en doesn't exist
     GetObjectRequest getObjectRequestEn = new GetObjectRequest("BuildComponents", "messages_en.properties");
     when(amazonS3.getObject(getObjectRequestEn)).thenThrow(AmazonS3Exception.class);
 

@@ -9,7 +9,7 @@ import org.springframework.core.io.ProtocolResolver;
 import com.amazonaws.services.s3.AmazonS3;
 
 /**
- * Adds support for s3 URLs (e.g. s3://<my_bucket>/<my_object>) using the
+ * Adds support for s3 URLs (e.g. s3://&lt;my_bucket&gt;/&lt;my_object&gt;) using the
  * {@link org.springframework.core.io.ResourceLoader} class.
  *
  */

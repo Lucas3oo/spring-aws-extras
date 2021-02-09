@@ -1,18 +1,38 @@
 plugins {
   id 'java-library'
   id 'maven-publish'
+  id 'maven'
+  id 'signing'
 }
 
-group = 'se.solrike'
+group = 'se.solrike.spring-aws-extras'
 version = '0.0.1'
 sourceCompatibility = '11'
 
 java {
   withSourcesJar()
+  withJavadocJar()
 }
+
+artifacts {
+  archives javadocJar, sourcesJar
+}
+signing {
+  sign configurations.archives
+}
+
+
 
 repositories {
   mavenCentral()
+  //  maven {
+  //    name 'github'
+  //    url 'https://maven.pkg.github.com/lucas3oo/spring-aws-extras'
+  //    credentials {
+  //      username System.getenv("USERNAME")
+  //      password System.getenv("TOKEN")
+  //    }
+  //  }
 }
 
 dependencies {
@@ -39,23 +59,21 @@ test {
 }
 
 
-
 // to publish run "./gradlew clean build publish"
-
 publishing {
   repositories {
-//    maven {
-//      // change to point to your repo, e.g. http://my.org/repo
-//      url = "$buildDir/repo"
-//    }
     maven {
-      name = "GitHubPackages"
-      url = uri("https://maven.pkg.github.com/lucas3oo/spring-aws-extras")
-      credentials {
-        username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-        password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-      }
+      // change to point to your repo, e.g. http://my.org/repo
+      url = "$buildDir/repo"
     }
+    //    maven {
+    //      name = "GitHubPackages"
+    //      url = uri("https://maven.pkg.github.com/lucas3oo/spring-aws-extras")
+    //      credentials {
+    //        username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+    //        password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+    //      }
+    //    }
 
 
   }
@@ -77,7 +95,7 @@ publishing {
         url = 'https://github.com/Lucas3oo/spring-aws-extras'
         licenses {
           license {
-            name = 'MIT'
+            name = 'MIT License'
             url = 'https://github.com/Lucas3oo/spring-aws-extras/blob/main/LICENSE'
           }
         }
@@ -85,7 +103,61 @@ publishing {
           developer {
             id = 'Lucas3oo'
             name = 'Lucas Persson'
+            email = 'Lucas3oo@users.noreply.github.com'
+            organization = 'Lucas Persson'
+            organizationUrl = 'https://github.com/Lucas3oo'
           }
+        }
+        scm {
+          connection = 'scm:git:https://github.com/Lucas3oo/spring-aws-extras.git'
+          developerConnection = 'scm:git:git@github.com:Lucas3oo/spring-aws-extras.git'
+          url = 'https://github.com/Lucas3oo/spring-aws-extras'
+        }
+      }
+    }
+  }
+}
+
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name 'spring-aws-extras'
+        packaging 'jar'
+        // optionally artifactId can be defined here
+        description 'Util classes to glue Spring and AWS together.'
+        url 'https://github.com/Lucas3oo/spring-aws-extras'
+
+        licenses {
+          license {
+            name 'MIT License'
+            url 'https://github.com/Lucas3oo/spring-aws-extras/blob/main/LICENSE'
+          }
+        }
+        developers {
+          developer {
+            id 'Lucas3oo'
+            name 'Lucas Persson'
+            email 'Lucas3oo@users.noreply.github.com'
+            organization 'Lucas Persson'
+            organizationUrl 'https://github.com/Lucas3oo'
+          }
+        }
+        scm {
+          connection 'scm:git:https://github.com/Lucas3oo/spring-aws-extras.git'
+          developerConnection 'scm:git:git@github.com:Lucas3oo/spring-aws-extras.git'
+          url 'https://github.com/Lucas3oo/spring-aws-extras'
         }
       }
     }

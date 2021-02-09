@@ -40,6 +40,7 @@ public class ResourceMessageSource extends ResourceBundleMessageSource {
    * @see ResourceLoader#getResource(String)
    *
    * @param basename
+   *          the basename as an URL or pseudo-URL
    */
   @Override
   @SuppressWarnings("all") // Suppress sonarLint warning
