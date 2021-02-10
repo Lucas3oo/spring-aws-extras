@@ -118,7 +118,8 @@ publishing {
   }
 }
 
-
+// https://central.sonatype.org/pages/ossrh-guide.html#deployment
+// https://central.sonatype.org/pages/gradle.html
 uploadArchives {
   repositories {
     mavenDeployer {
