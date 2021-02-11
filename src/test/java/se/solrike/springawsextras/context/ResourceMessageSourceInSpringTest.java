@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Locale;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -15,11 +16,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ResourceLoader;
 
+import com.amazonaws.SDKGlobalConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
 
+/**
+ *
+ * The test need to be run with -Daws.region=us-east-1 or some other region
+ *
+ * @author Lucas Persson
+ *
+ */
 @SpringBootTest(classes = { S3ProtocolResolverConfigurator.class, TestConfigurationMock.class })
 @TestMethodOrder(OrderAnnotation.class)
 class ResourceMessageSourceInSpringTest {
+
+  static {
+    System.setProperty(SDKGlobalConfiguration.AWS_REGION_SYSTEM_PROPERTY, "us-east-1");
+  }
 
   @Autowired
   ResourceLoader mResourceLoader;
@@ -32,6 +45,12 @@ class ResourceMessageSourceInSpringTest {
   void setUp() {
     mMessageSource = new ResourceMessageSource(mResourceLoader);
     mMessageSource.setBasename("s3://BuildComponents/messages");
+  }
+
+  @AfterAll
+  static void tearDownAll() {
+    // remove SDKGlobalConfiguration.AWS_REGION_SYSTEM_PROPERTY
+    System.setProperties(null);
   }
 
   @Test
