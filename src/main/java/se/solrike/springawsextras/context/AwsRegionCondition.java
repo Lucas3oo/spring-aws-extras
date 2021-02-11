@@ -9,8 +9,12 @@ import com.amazonaws.SdkClientException;
 /**
  * Condition that is true if there is an AWS region env var or system property or profile
  * configured.
- *
+ * <p>
  * EC2 instance identity is not supported.
+ * <p>
+ * This condition can be used to automatically detect if the Spring app is running in AWS cloud
+ * or not.
+ *
  *
  * @author Lucas Persson
  *

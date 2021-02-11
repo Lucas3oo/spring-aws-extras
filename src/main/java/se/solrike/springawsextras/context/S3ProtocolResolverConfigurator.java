@@ -13,6 +13,8 @@ import com.amazonaws.services.s3.AmazonS3;
  * Adds support for s3 URLs (e.g. s3://&lt;my_bucket&gt;/&lt;my_object&gt;) using the
  * {@link org.springframework.core.io.ResourceLoader} class.
  *
+ * Only created if the {@link AwsRegionCondition} is true.
+ *
  */
 @Configuration
 @Conditional(AwsRegionCondition.class)

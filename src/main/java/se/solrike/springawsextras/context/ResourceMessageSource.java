@@ -17,7 +17,7 @@ import org.springframework.core.io.ResourceLoader;
  * Only resource bundles with language are supported. That is no country or variant/script is
  * supported.
  *
- * @author lucas persson
+ * @author Lucas Persson
  *
  */
 public class ResourceMessageSource extends ResourceBundleMessageSource {

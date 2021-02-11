@@ -6,7 +6,7 @@ import com.amazonaws.regions.AwsRegionProviderChain;
 import com.amazonaws.regions.AwsSystemPropertyRegionProvider;
 
 /**
- * Region provider chain for EnvVar, system properties and profiles.
+ * Region provider chain for env var, system properties and profiles.
  *
  * EC2 instance identity is not supported.
  *
