@@ -31,6 +31,7 @@ public class TestConfigForS3Support {
   @Bean("someClass")
   @Primary
   @ConditionalOnBean(name = "SimpleStorageProtocolResolver")
+  @DependsOn("SimpleStorageProtocolResolver")
   public SomeClass someClassWithS3(ResourceLoader resourceLoaderWithS3) {
     return new SomeClass(resourceLoaderWithS3, true);
   }
