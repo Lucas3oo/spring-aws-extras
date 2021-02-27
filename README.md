@@ -5,7 +5,7 @@ For instance you can use Spring's ResourceLoader to load Java ResourceBundles lo
 
 To use it from Gradle depend on:
 
-	implementation 'se.solrike.spring-aws-extras:spring-aws-extras:0.0.2'
+	implementation 'se.solrike.spring-aws-extras:spring-aws-extras:0.0.3'
 
 
 Code example on add S3 URL support to Spring's ResourceLoader.
