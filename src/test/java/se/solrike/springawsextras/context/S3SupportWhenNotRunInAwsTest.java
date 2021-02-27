@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-@SpringBootTest(classes = { S3ProtocolResolverConfigurator.class, TestConfigForS3Support.class })
+@SpringBootTest(classes = { TestConfigForS3Support.class })
 class S3SupportWhenNotRunInAwsTest {
 
   @Autowired

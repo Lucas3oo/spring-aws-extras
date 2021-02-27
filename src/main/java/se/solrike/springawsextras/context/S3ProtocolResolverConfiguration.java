@@ -22,7 +22,7 @@ import com.amazonaws.services.s3.AmazonS3;
  */
 @Configuration
 @Conditional(AwsRegionCondition.class)
-public class S3ProtocolResolverConfigurator {
+public class S3ProtocolResolverConfiguration {
 
   /**
    * The bean is not really to be used. Created so that the side effect to add the resolver to

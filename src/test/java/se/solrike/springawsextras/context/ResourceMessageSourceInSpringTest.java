@@ -26,7 +26,7 @@ import com.amazonaws.services.s3.AmazonS3;
  * @author Lucas Persson
  *
  */
-@SpringBootTest(classes = { S3ProtocolResolverConfigurator.class, TestConfigurationMock.class })
+@SpringBootTest(classes = { S3ProtocolResolverConfiguration.class, TestConfigurationMock.class })
 @TestMethodOrder(OrderAnnotation.class)
 class ResourceMessageSourceInSpringTest {
 

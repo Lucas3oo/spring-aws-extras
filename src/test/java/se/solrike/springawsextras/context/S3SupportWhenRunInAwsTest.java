@@ -12,8 +12,7 @@ import org.springframework.core.io.ResourceLoader;
 
 import com.amazonaws.SDKGlobalConfiguration;
 
-@SpringBootTest(
-    classes = { S3ProtocolResolverConfigurator.class, TestConfigurationMock.class, TestConfigForS3Support.class })
+@SpringBootTest(classes = { TestConfigurationMock.class, TestConfigForS3Support.class })
 class S3SupportWhenRunInAwsTest {
 
   static {
