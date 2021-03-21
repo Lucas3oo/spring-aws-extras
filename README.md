@@ -5,8 +5,12 @@ For instance you can use Spring's ResourceLoader to load Java ResourceBundles lo
 
 To use it from Gradle depend on:
 
-	implementation 'se.solrike.spring-aws-extras:spring-aws-extras:0.0.3'
+	implementation 'se.solrike.spring-aws-extras:spring-aws-extras:0.0.4'
 
+
+Version 0.0.3 work with Spring boot 2.3.x and Spring Cloud AWS 2.2.x.
+
+Version 0.0.4 work with Spring boot 2.4.x and Spring Cloud AWS 2.3.x.
 
 Code example on add S3 URL support to Spring's ResourceLoader.
 Import the S3ProtocolResolverConfiguration Spring configuration that will add an S3 protocol resolver
@@ -30,8 +34,8 @@ public class TestConfigForS3Support {
    */
   @Bean("someClass")
   @Primary
-  @ConditionalOnBean(name = "SimpleStorageProtocolResolver")
-  @DependsOn("SimpleStorageProtocolResolver")
+  @ConditionalOnBean(name = S3ProtocolResolverConfiguration.BEAN_NAME)
+  @DependsOn(S3ProtocolResolverConfiguration.BEAN_NAME)
   public SomeClass someClassWithS3(ResourceLoader resourceLoaderWithS3) {
     return new SomeClass(resourceLoaderWithS3, true);
   }

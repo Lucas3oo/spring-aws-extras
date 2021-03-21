@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'se.solrike.spring-aws-extras'
-version = '0.0.3'
+version = '0.0.4'
 sourceCompatibility = '11'
 
 java {
@@ -39,10 +39,10 @@ dependencies {
   def awsSdkVersion = '1.11.928'
   api "com.amazonaws:aws-java-sdk-core:$awsSdkVersion"
   api "com.amazonaws:aws-java-sdk-s3:$awsSdkVersion"
-  api 'org.springframework:spring-context:5.2.8.RELEASE'
-  api 'org.springframework:spring-core:5.2.8.RELEASE'
+  api 'org.springframework:spring-context:5.3.5'
+  api 'org.springframework:spring-core:5.3.5'
   implementation 'org.slf4j:slf4j-api:1.7.30'
-  implementation ('org.springframework.cloud:spring-cloud-aws-context:2.2.1.RELEASE') {
+  implementation ('io.awspring.cloud:spring-cloud-aws-core:2.3.0') {
     exclude group: 'com.amazonaws'
   }
   runtimeOnly "com.amazonaws:aws-java-sdk-kms:$awsSdkVersion"
@@ -50,7 +50,7 @@ dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
   testImplementation 'org.mockito:mockito-core:3.7.7'
   testImplementation 'org.mockito:mockito-junit-jupiter:3.7.7'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test:2.3.3.RELEASE'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test:2.4.4'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 

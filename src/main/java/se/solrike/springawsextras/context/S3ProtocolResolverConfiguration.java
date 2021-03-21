@@ -1,6 +1,5 @@
 package se.solrike.springawsextras.context;
 
-import org.springframework.cloud.aws.core.io.s3.SimpleStorageProtocolResolver;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -8,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ProtocolResolver;
 
 import com.amazonaws.services.s3.AmazonS3;
+
+import io.awspring.cloud.core.io.s3.SimpleStorageProtocolResolver;
 
 /**
  * Adds support for s3 URLs (e.g. s3://&lt;my_bucket&gt;/&lt;my_object&gt;) using the
@@ -24,6 +25,8 @@ import com.amazonaws.services.s3.AmazonS3;
 @Conditional(AwsRegionCondition.class)
 public class S3ProtocolResolverConfiguration {
 
+  public static final String BEAN_NAME = "simpleStorageProtocolResolver";
+
   /**
    * The bean is not really to be used. Created so that the side effect to add the resolver to
    * the context is triggered.
@@ -34,7 +37,7 @@ public class S3ProtocolResolverConfiguration {
    *          AWS SDK client for S3
    * @return ProtocolResolver for S3 URLs
    */
-  @Bean("SimpleStorageProtocolResolver")
+  @Bean(BEAN_NAME)
   public ProtocolResolver protocolResolver(ConfigurableApplicationContext context, AmazonS3 amazonS3) {
     ProtocolResolver resolver = new SimpleStorageProtocolResolver(amazonS3);
     context.addProtocolResolver(resolver);

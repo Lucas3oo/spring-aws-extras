@@ -1,6 +1,6 @@
 package se.solrike.springawsextras.context;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.AfterAll;

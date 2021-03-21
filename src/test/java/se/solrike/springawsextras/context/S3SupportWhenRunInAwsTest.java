@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.aws.core.io.s3.SimpleStorageResource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import com.amazonaws.SDKGlobalConfiguration;
+
+import io.awspring.cloud.core.io.s3.SimpleStorageResource;
 
 @SpringBootTest(classes = { TestConfigurationMock.class, TestConfigForS3Support.class })
 class S3SupportWhenRunInAwsTest {
